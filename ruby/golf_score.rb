@@ -1,3 +1,12 @@
+# 2打目以降の判定を定数で定義
+SCORE_NAMES = {
+      -3 => "アルバトロス",
+      -2 => "イーグル",
+      -1 => "バーディ",
+      0  => "パー",
+      1  => "ボギー"
+}
+
 def judge_golf_score(par, stroke)
   # 1打で入れた場合の判定　
   if stroke == 1
@@ -9,18 +18,10 @@ def judge_golf_score(par, stroke)
     end
   end
 
-  # 2打目以降
+  # 2打目以降、golf_scoreの結果がSCORE_NAMESにある場合はその用語を、それ以外は「⚪︎ボギー」として返す
   golf_score = stroke - par
-  score_names = {
-    -3 => "アルバトロス",
-    -2 => "イーグル",
-    -1 => "バーディ",
-    0  => "パー",
-    1  => "ボギー"
-  }
+  SCORE_NAMES[golf_score] || "#{golf_score}ボギー"
 
-  # golf_scoreの結果がscore_namesにある場合はその用語を、それ以外は「⚪︎ボギー」として返す
-  score_names[golf_score] || "#{golf_score}ボギー"
 end
 
 # 標準入力から全行読み込む。改行を除いて、配列にする。
